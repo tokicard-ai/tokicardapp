@@ -210,3 +210,16 @@ color:#9D00FF;
   justify-content: center;
   margin-bottom: 5px;
 }
+.socialicon{
+  display: flex;
+  justify-content: end;
+  gap: 15px;
+}
+.socialicon img{
+  height: 20px;
+}
+@media (max-width: 768px)  {
+  .socialicon{
+    justify-content: center;
+  }
+}  

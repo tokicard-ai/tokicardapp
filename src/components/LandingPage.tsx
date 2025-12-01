@@ -25,6 +25,9 @@ import whatsappfour from '../assets/whatsappfour.png';
 import whatsappfive from '../assets/whatsappfive.png';
 import whatsappsix from '../assets/whatsappsix.png';
 import whatsappseven from '../assets/whatsappseven.png';
+import Instagram from '../assets/instagram.png';
+import Telegram from '../assets/telegram.png';
+import Xicon from '../assets/x.png';
 import { Link } from "react-router-dom";
 
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
@@ -987,12 +990,24 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center sm:text-right order-3"
             >
-                 <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
+                 {/* <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
                 Follow Us On X
               </button>
               <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}>
                 Follow Us On Instagram
-              </button>
+              </button> */}
+              <div className='  socialicon'>
+                  <button  onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}>
+                  <img src={Instagram} alt="" />
+                </button>
+                <button  onClick={() => window.open('https://t.me/tokicardai', '_blank')}>
+                  <img src={Telegram} alt="" />
+                </button>
+                <button onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
+                  <img src={Xicon} alt="" />
+                </button>
+              
+              </div>
               <p className="text-[11px] sm:text-[12px] text-gray-500" style={{ fontWeight: 400 }}>
                 © 2025 TokiCard. All Rights Reserved.
               </p>
