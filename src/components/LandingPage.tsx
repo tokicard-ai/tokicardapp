@@ -28,6 +28,7 @@ import whatsappseven from '../assets/whatsappseven.png';
 import Instagram from '../assets/instagram.png';
 import Telegram from '../assets/telegram.png';
 import Xicon from '../assets/x.png';
+import Tictok from '../assets/tictok.png'
 import { Link } from "react-router-dom";
 
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
@@ -997,14 +998,18 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
                 Follow Us On Instagram
               </button> */}
               <div className='  socialicon'>
+                  <button onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
+                  <img src={Xicon} alt="" />
+                </button>
+
                   <button  onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}>
                   <img src={Instagram} alt="" />
                 </button>
                 <button  onClick={() => window.open('https://t.me/tokicardai', '_blank')}>
                   <img src={Telegram} alt="" />
                 </button>
-                <button onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
-                  <img src={Xicon} alt="" />
+                <button onClick={() => window.open('https://www.tiktok.com/@tokicardai', '_blank')}>
+                  <img src={Tictok} alt="" />
                 </button>
               
               </div>
