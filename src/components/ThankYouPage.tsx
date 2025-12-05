@@ -195,7 +195,7 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
           style={{ fontWeight: 400 }}
         >
           
-         Follow Us on Tictok
+         Follow Us on Tiktok
         </motion.button>
           {/* Follow Us on X */}
         <motion.button
