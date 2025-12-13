@@ -22,7 +22,7 @@ export default function UsersListPage() {
       const waitlistRef = collection(db, "waitlist");
       const q = query(waitlistRef, orderBy("timestamp", "desc"));
 
-      // ✅ Real-time updates
+      //  Real-time updates
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const userList = snapshot.docs.map((doc) => ({
           id: doc.id,
