@@ -5,6 +5,7 @@ import { WaitlistForm } from './components/Waitlist';
 import { ThankYouPage } from './components/ThankYouPage';
 import { ReferralLookupPage } from './components/referral';
 import Dashboard from "./components/dashboard";
+import Users from "./components/users";
 
 import { useState } from 'react';
 
@@ -58,6 +59,7 @@ function AppRoutes() {
           <Route path="/dashboard" element={<Dashboard />} />
         {/* Referral lookup page */}
         <Route path="/referral" element={<ReferralLookupPage />} />
+         <Route path="/users" element={<Users />} />
       </Routes>
 
       <Toaster position="top-center" richColors />
