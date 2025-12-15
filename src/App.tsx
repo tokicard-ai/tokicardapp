@@ -6,7 +6,7 @@ import { ThankYouPage } from './components/ThankYouPage';
 import { ReferralLookupPage } from './components/referral';
 import Dashboard from "./components/dashboard";
 import Users from "./components/users";
-
+import UserList from "./components/UserList";
 import { useState } from 'react';
 
 function AppRoutes() {
@@ -60,6 +60,7 @@ function AppRoutes() {
         {/* Referral lookup page */}
         <Route path="/referral" element={<ReferralLookupPage />} />
          <Route path="/users" element={<Users />} />
+          <Route path="/UserList" element={<UserList/>} />
       </Routes>
 
       <Toaster position="top-center" richColors />
