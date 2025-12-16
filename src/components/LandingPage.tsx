@@ -145,6 +145,7 @@ useEffect(() => {
       <a href="#home" className="text-[15px] text-black hover:text-purple-600 transition-colors">Home</a>
       <a href="#about" className="text-[15px] text-black hover:text-purple-600 transition-colors">About</a>
       <a href="#features" className="text-[15px] text-black hover:text-purple-600 transition-colors">Features</a>
+      <a href="https://x.com/tokicardAI" className="text-[15px] text-black hover:text-purple-600 transition-colors"> Follow on X</a>
      <Link 
   to="/referral"
   onClick={() => setMobileMenuOpen(false)}
@@ -239,6 +240,13 @@ useEffect(() => {
               className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
             >
               Features
+            </a>
+             <a 
+              href="https://x.com/tokicardAI"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
+            >
+              Follow on X
             </a>
             <Link 
   to="/referral"

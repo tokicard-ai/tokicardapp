@@ -275,6 +275,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
             {/* Show different heading based on state */}
             {existingReferralId ? `Welcome Back, ${existingUserName}!` : "Get Early Access"}
           </h1>
+          
           <p className="text-[13px] sm:text-[14px] text-center text-[#666666] mb-6 max-w-[420px]">
             {existingReferralId ? 
                 "Share your link below to earn more points." : 
@@ -327,6 +328,8 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                      </div>
                  </motion.div>
 
+                 
+
                  {/* Referral Link Block */}
                  <p className="text-[14px] text-[#444] mb-3 font-medium">
                      This is your referral link:
@@ -344,7 +347,25 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                      >
                          Copy
                      </button>
+
+                     
                  </div>
+                       <div className="followxbtn">
+               {/* Follow Us on X */}
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0, duration: 0.5 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => window.open('https://x.com/tokicardAI', '_blank')}
+                  className="w-full bg-black text-white text-[14px] sm:text-[15px] rounded-full py-3 hover:bg-black/90 transition-colors disabled:opacity-60 "
+                  style={{ fontWeight: 400 }}
+                >
+                  
+                  Follow Us on X
+                </motion.button>
+          </div>
              </motion.div>
           ) : (
             <>
@@ -403,6 +424,22 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                         >
                             {isSubmitting ? "Checking status..." : "Join Waitlist"}
                         </button>
+                              <div className="followxbtn">
+                                       {/* Follow Us on X */}
+                                        <motion.button
+                                          initial={{ opacity: 0, y: 10 }}
+                                          animate={{ opacity: 1, y: 0 }}
+                                          transition={{ delay: 1.0, duration: 0.5 }}
+                                          whileHover={{ scale: 1.02 }}
+                                          whileTap={{ scale: 0.98 }}
+                                          onClick={() => window.open('https://x.com/tokicardAI', '_blank')}
+                                         className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                                          style={{ fontWeight: 400 }}
+                                        >
+                                          
+                                          Follow Us on X
+                                        </motion.button>
+                                  </div>
                     </form>
                 )}
 
