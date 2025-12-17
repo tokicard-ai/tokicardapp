@@ -344,11 +344,11 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
   // 🎨 RENDER SECTION
   return (
-    <div className="bg-[#f5f5f5]  relative h-screen d-flex flex-1 items-center justify-center rendarsection">
-            {/* <div className=" flex-1 flex items-center justify-center  mt-4">
+    <div className="bg-[#f5f5f5]  relative ">
+            <div className=" flex-1 flex items-center justify-center  mt-4">
             <img src={institutionfund}  alt="Logo" width={208} className="rdt" />
-          </div> */}
-  {/* <div  className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto gdh">
+          </div>
+  <div  className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto gdh">
  
  <div style={styles.announcementBox}>
       <div style={styles.announcementContent} className="contentwrap">
@@ -374,7 +374,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
           </p>
         </div>
       </div>
-        <button onClick={() => window.open('https://app.institutional-funding.com/checkout/?referral_id=106f19ec0627', '_blank')}
+        <button onClick={() => window.open('https://institutional-funding.com', '_blank')}
                   
                   style={{ fontWeight: 400 }}
                             className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
@@ -389,7 +389,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                            Follow On Instagram
                         </button>
     </div>
-    </div> */}
+    </div>
       
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div className="w-full max-w-[572px] flex flex-col items-center px-4 sm:px-0">
