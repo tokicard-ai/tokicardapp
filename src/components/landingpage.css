@@ -243,3 +243,8 @@ color:#9D00FF;
 .institutionbtn{
   font-family: "Familjen Grotesk";
 }
+.rendarsection{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

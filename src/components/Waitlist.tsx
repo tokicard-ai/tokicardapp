@@ -344,13 +344,11 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
   // 🎨 RENDER SECTION
   return (
-    <div className="bg-[#f5f5f5]  relative ">
-         {/* Logo, Heading, and Referrer Info (No Change) */}
-            <div className=" flex-1 flex items-center justify-center  mt-4">
-            {/* <img src={institutionfund} alt="Logo" width={208} className="rdt"/> */}
+    <div className="bg-[#f5f5f5]  relative h-screen d-flex flex-1 items-center justify-center rendarsection">
+            {/* <div className=" flex-1 flex items-center justify-center  mt-4">
             <img src={institutionfund}  alt="Logo" width={208} className="rdt" />
-          </div>
-  <div  className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto gdh">
+          </div> */}
+  {/* <div  className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto gdh">
  
  <div style={styles.announcementBox}>
       <div style={styles.announcementContent} className="contentwrap">
@@ -384,14 +382,14 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                            Join Early Access
                         </button>
       <button onClick={() => window.open('https://www.instagram.com/institutionalfunding?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', '_blank')}
-                  // className="w-full bg-black text-white text-[14px] sm:text-[15px] rounded-full py-3 hover:bg-black/90 transition-colors disabled:opacity-60 "
+                 
                   style={{ fontWeight: 400 }}
                             className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50 btntwo"
                         >
                            Follow On Instagram
                         </button>
     </div>
-    </div>
+    </div> */}
       
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div className="w-full max-w-[572px] flex flex-col items-center px-4 sm:px-0">
