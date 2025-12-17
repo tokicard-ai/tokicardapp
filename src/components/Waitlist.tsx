@@ -374,7 +374,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
           </p>
         </div>
       </div>
-        <button onClick={() => window.open('https://institutional-funding.com', '_blank')}
+        <button onClick={() => window.open('https://app.institutional-funding.com/login', '_blank')}
                   
                   style={{ fontWeight: 400 }}
                             className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
