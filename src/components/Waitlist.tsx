@@ -14,6 +14,7 @@ import { User, Mail, Phone } from "lucide-react";
 import { motion } from "framer-motion"; // Changed import to 'framer-motion' for simplicity
 import tokilogo from "../assets/tokilogo.png";
 import cardImage from "../assets/customercard.png";
+import institutionfund from "../assets/institutionfund.png";
 import "./landingpage.css";
 
 // ✅ Generate lowercase referral codes for consistency
@@ -34,6 +35,85 @@ interface WaitlistFormProps {
 }
 
 export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
+  const styles = {
+  container: {
+    minHeight: '100vh',
+    backgroundColor: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '2rem',
+  },
+  contentWrapper: {
+    // width: '100%',
+    // maxWidth: '28rem',
+    // margin: '0 auto',
+    
+  },
+  logoSection: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '3rem',
+  },
+  logoContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+  },
+  logoText: {
+    color: '#2C5F7C',
+  },
+  logoLine: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    letterSpacing: '0.05em',
+    lineHeight: '1',
+  },
+  announcementsection: {
+    
+  },
+  announcementBox: {
+    // border: '2px dashed #9CA3AF',
+    // borderRadius: '10px',
+    // padding: '19px',
+    textAlign: 'center',
+    
+    
+  },
+  announcementContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    // gap: '1rem',
+     border: '2px dashed #9CA3AF',
+     borderRadius: '10px',
+      padding: '19px',
+       marginBottom: '10px',
+  },
+  announcementText: {
+    fontSize: '1.125rem',
+    lineHeight: '1.75',
+    color: '#111827',
+    margin: 0,
+  },
+  semibold: {
+    fontWeight: 600,
+  },
+  bold: {
+    fontWeight: 700,
+  },
+  launchInfo: {
+    paddingTop: '1.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    // gap: '0.40rem',
+  },
+  launchText: {
+    fontSize: '1.125rem',
+    color: '#111827',
+    margin: 0,
+  },
+};
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -264,11 +344,59 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
   // 🎨 RENDER SECTION
   return (
-    <div className="h-screen bg-[#f5f5f5] flex flex-col relative overflow-hidden">
+    <div className="bg-[#f5f5f5]  relative ">
+         {/* Logo, Heading, and Referrer Info (No Change) */}
+            <div className=" flex-1 flex items-center justify-center  mt-4">
+            {/* <img src={institutionfund} alt="Logo" width={208} className="rdt"/> */}
+            <img src={institutionfund}  alt="Logo" width={208} className="rdt" />
+          </div>
+  <div  className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto gdh">
+ 
+ <div style={styles.announcementBox}>
+      <div style={styles.announcementContent} className="contentwrap">
+        <p style={styles.announcementText}>
+          <span style={styles.semibold}>TokiCard</span> is partnering with <span style={styles.semibold}>Institutional Funding,</span>
+        </p>
+        <p style={styles.announcementText}>
+          a global proprietary trading firm,
+        </p>
+        <p style={styles.announcementText}>
+          to give early users exclusive access to a <span style={styles.bold}>$10,000</span>
+        </p>
+        <p style={styles.announcementText}>
+          2-Step Trading Challenge account (worth $70).
+        </p>
+        
+        <div style={styles.launchInfo}>
+          <p style={{...styles.launchText, ...styles.semibold}}>
+            Launching the second week of January.
+          </p>
+          <p style={styles.launchText}>
+            Limited spots. Only early users qualify.
+          </p>
+        </div>
+      </div>
+        <button onClick={() => window.open('https://app.institutional-funding.com/checkout/?referral_id=106f19ec0627', '_blank')}
+                  
+                  style={{ fontWeight: 400 }}
+                            className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                        >
+                           Join Early Access
+                        </button>
+      <button onClick={() => window.open('https://www.instagram.com/institutionalfunding?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', '_blank')}
+                  // className="w-full bg-black text-white text-[14px] sm:text-[15px] rounded-full py-3 hover:bg-black/90 transition-colors disabled:opacity-60 "
+                  style={{ fontWeight: 400 }}
+                            className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50 btntwo"
+                        >
+                           Follow On Instagram
+                        </button>
+    </div>
+    </div>
+      
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div className="w-full max-w-[572px] flex flex-col items-center px-4 sm:px-0">
           {/* Logo, Heading, and Referrer Info (No Change) */}
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-2 sm:mb-2">
             <img src={tokilogo} alt="Logo" width={118} />
           </div>
           <h1 className="text-[28px] sm:text-[32px] leading-[1.2] mb-2 text-center text-black">
@@ -420,7 +548,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                            className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
                         >
                             {isSubmitting ? "Checking status..." : "Join Waitlist"}
                         </button>
@@ -433,7 +561,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                                           whileHover={{ scale: 1.02 }}
                                           whileTap={{ scale: 0.98 }}
                                           onClick={() => window.open('https://x.com/tokicardAI', '_blank')}
-                                         className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+                                         className="institutionbtn w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
                                           style={{ fontWeight: 400 }}
                                         >
                                           

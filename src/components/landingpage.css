@@ -226,3 +226,20 @@ color:#9D00FF;
 .followxbtn{
   margin-top: 10px;
 }
+.contentwrap{
+  font-family: "Familjen Grotesk";
+}
+.rdt{
+  margin-top: 20px;
+}
+.gdh{
+  /* border: 2px solid red; */
+  flex-direction: column;
+  justify-content: center;
+}
+.btntwo{
+  margin-top: 10px;
+}
+.institutionbtn{
+  font-family: "Familjen Grotesk";
+}
