@@ -193,11 +193,11 @@ export default function BulkExportPage() {
   // 🔐 LOGIN SCREEN (if not authenticated)
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4 ">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-md w-full"
+          className="max-w-md "
         >
           <div className="bg-white rounded-2xl shadow-2xl p-8 sm:p-10">
             
@@ -255,11 +255,11 @@ export default function BulkExportPage() {
 
   // 📊 MAIN EXPORT PAGE (After successful login)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50 flex items-center justify-center p-4 sm:p-6 ">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="max-w-2xl w-full"
+        className="max-w-2xl "
       >
         {/* Logout Button */}
         <div className="flex justify-end mb-4">
@@ -377,7 +377,7 @@ export default function BulkExportPage() {
               className="mt-6 bg-gray-50 rounded-xl p-4 text-center"
             >
               <Loader2 className="w-6 h-6 text-purple-600 animate-spin mx-auto mb-2" />
-              <p className="text-sm text-gray-600">Processing... This may take 30-60 seconds for all users</p>
+              <p className="text-sm text-gray-600">Processing... This may take 1-3 minutes for all users</p>
             </motion.div>
           )}
         </div>
