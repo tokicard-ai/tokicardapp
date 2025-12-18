@@ -248,3 +248,12 @@ color:#9D00FF;
   align-items: center;
   justify-content: center;
 }
+.ddf{
+  border: 2px solid purple;
+  color: purple;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.loaduser{
+  margin-bottom: 20px;
+}

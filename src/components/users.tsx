@@ -1,297 +1,385 @@
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
 import { getDb } from "../lib/firebase";
 import { motion } from "framer-motion";
-import { Loader2, Users, Search, Phone, Mail, User, Copy, Check } from "lucide-react";
+import { Loader2, Mail, Phone, Download, Copy, Check, Lock, LogOut } from "lucide-react";
 import { toast } from "sonner@2.0.3";
+import './landingpage.css'
 
-export default function UsersListPage() {
-  const [users, setUsers] = useState<any[]>([]);
-  const [filteredUsers, setFilteredUsers] = useState<any[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [total, setTotal] = useState(0);
-  
-  // Track what was just copied
+// 🔐 SET YOUR PASSWORD HERE - CHANGE THIS!
+const ADMIN_PASSWORD = "THEFAMILY";
+
+export default function BulkExportPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [totalUsers, setTotalUsers] = useState<number | null>(null);
   const [copiedEmails, setCopiedEmails] = useState(false);
   const [copiedPhones, setCopiedPhones] = useState(false);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
+  // 🔐 Check password
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (passwordInput === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      toast.success("✅ Access granted!");
+      setPasswordInput("");
+    } else {
+      toast.error("❌ Wrong password!");
+      setPasswordInput("");
+    }
+  };
+
+  // 🚪 Logout
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setTotalUsers(null);
+    toast.info("Logged out");
+  };
+
+  // 📧 SMART: Only load emails, don't render anything
+  const handleCopyAllEmails = async () => {
+    if (loading) return;
+    
+    setLoading(true);
+    setCopiedEmails(false);
+    
+    try {
+      toast.info('📧 Fetching all emails from database...');
+      
       const db = await getDb();
       const waitlistRef = collection(db, "waitlist");
-      const q = query(waitlistRef, orderBy("timestamp", "desc"));
-
-      //  Real-time updates
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const userList = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setUsers(userList);
-        setFilteredUsers(userList);
-        setTotal(userList.length);
-        setLoading(false);
+      
+      console.log('⏳ Fetching documents...');
+      const snapshot = await getDocs(waitlistRef);
+      
+      console.log(`✅ Got ${snapshot.size} users`);
+      setTotalUsers(snapshot.size);
+      
+      // Extract ONLY emails (don't store full user objects!)
+      const emails: string[] = [];
+      snapshot.forEach(doc => {
+        const email = doc.data().email;
+        if (email) emails.push(email);
       });
-
-      return () => unsubscribe();
-    };
-
-    fetchUsers();
-  }, []);
-
-  // 🔍 Search logic
-  useEffect(() => {
-    if (!searchTerm.trim()) {
-      setFilteredUsers(users);
-      return;
-    }
-
-    const term = searchTerm.toLowerCase();
-    const filtered = users.filter(
-      (user) =>
-        user.fullName?.toLowerCase().includes(term) ||
-        user.email?.toLowerCase().includes(term) ||
-        user.phoneNumber?.toLowerCase().includes(term)
-    );
-    setFilteredUsers(filtered);
-  }, [searchTerm, users]);
-
-  // 📧 Copy ALL emails to clipboard
-  const handleCopyAllEmails = async () => {
-    try {
-      // Get all emails from filtered users (respects search)
-      const emails = filteredUsers
-        .map(user => user.email)
-        .filter(email => email) // Remove any undefined/null
-        .join(', '); // Separate with commas
-
-      if (!emails) {
-        toast.error('No emails to copy');
-        return;
-      }
-
-      await navigator.clipboard.writeText(emails);
+      
+      console.log(`📧 Extracted ${emails.length} emails`);
+      
+      // Join and copy
+      const emailString = emails.join(', ');
+      await navigator.clipboard.writeText(emailString);
+      
       setCopiedEmails(true);
-      toast.success(`✅ Copied ${filteredUsers.length} emails!`);
-
-      // Reset the checkmark after 2 seconds
-      setTimeout(() => setCopiedEmails(false), 2000);
-    } catch (error) {
-      toast.error('Failed to copy emails');
-      console.error('Copy error:', error);
-    }
-  };
-
-  // 📞 Copy ALL phone numbers to clipboard
-  const handleCopyAllPhones = async () => {
-    try {
-      // Get all phone numbers from filtered users (respects search)
-      const phones = filteredUsers
-        .map(user => user.phoneNumber)
-        .filter(phone => phone) // Remove any undefined/null
-        .join(', '); // Separate with commas
-
-      if (!phones) {
-        toast.error('No phone numbers to copy');
-        return;
+      toast.success(`✅ Copied ${emails.length.toLocaleString()} emails!`);
+      
+      setTimeout(() => setCopiedEmails(false), 3000);
+      
+    } catch (error: any) {
+      console.error('❌ Error:', error);
+      
+      if (error.message?.includes('quota') || error.message?.includes('RESOURCE_EXHAUSTED')) {
+        toast.error('❌ Firebase quota exceeded! Upgrade to Blaze plan.');
+      } else {
+        toast.error('Failed to fetch emails: ' + error.message);
       }
-
-      await navigator.clipboard.writeText(phones);
-      setCopiedPhones(true);
-      toast.success(`✅ Copied ${filteredUsers.filter(u => u.phoneNumber).length} phone numbers!`);
-
-      // Reset the checkmark after 2 seconds
-      setTimeout(() => setCopiedPhones(false), 2000);
-    } catch (error) {
-      toast.error('Failed to copy phone numbers');
-      console.error('Copy error:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-6xl mx-auto"
-      >
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-8 gap-4">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800 text-center sm:text-left">
-            Users Contact List
-          </h1>
-          {/* <div className="flex justify-center sm:justify-end">
-            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200">
-              <Users className="w-5 h-5 text-purple-600" />
-              <span className="text-gray-700 font-medium">Total: {total}</span>
+  // 📞 SMART: Only load phone numbers, don't render anything
+  const handleCopyAllPhones = async () => {
+    if (loading) return;
+    
+    setLoading(true);
+    setCopiedPhones(false);
+    
+    try {
+      toast.info('📞 Fetching all phone numbers from database...');
+      
+      const db = await getDb();
+      const waitlistRef = collection(db, "waitlist");
+      
+      console.log('⏳ Fetching documents...');
+      const snapshot = await getDocs(waitlistRef);
+      
+      console.log(`✅ Got ${snapshot.size} users`);
+      setTotalUsers(snapshot.size);
+      
+      // Extract ONLY phone numbers (don't store full user objects!)
+      const phones: string[] = [];
+      snapshot.forEach(doc => {
+        const phone = doc.data().phoneNumber;
+        if (phone) phones.push(phone);
+      });
+      
+      console.log(`📞 Extracted ${phones.length} phone numbers`);
+      
+      // Join and copy
+      const phoneString = phones.join(', ');
+      await navigator.clipboard.writeText(phoneString);
+      
+      setCopiedPhones(true);
+      toast.success(`✅ Copied ${phones.length.toLocaleString()} phone numbers!`);
+      
+      setTimeout(() => setCopiedPhones(false), 3000);
+      
+    } catch (error: any) {
+      console.error('❌ Error:', error);
+      
+      if (error.message?.includes('quota') || error.message?.includes('RESOURCE_EXHAUSTED')) {
+        toast.error('❌ Firebase quota exceeded! Upgrade to Blaze plan.');
+      } else {
+        toast.error('Failed to fetch phones: ' + error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 📥 Download full CSV
+  const handleDownloadCSV = async () => {
+    if (loading) return;
+    
+    setLoading(true);
+    
+    try {
+      toast.info('📥 Preparing CSV download...');
+      
+      const db = await getDb();
+      const waitlistRef = collection(db, "waitlist");
+      
+      const snapshot = await getDocs(waitlistRef);
+      setTotalUsers(snapshot.size);
+      
+      // Create CSV
+      let csv = 'Full Name,Email,Phone Number\n';
+      
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const name = (data.fullName || '').replace(/"/g, '""');
+        const email = (data.email || '').replace(/"/g, '""');
+        const phone = (data.phoneNumber || 'N/A').replace(/"/g, '""');
+        csv += `"${name}","${email}","${phone}"\n`;
+      });
+      
+      // Download
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `tokicard-all-users-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      toast.success(`✅ Downloaded ${snapshot.size.toLocaleString()} users as CSV!`);
+      
+    } catch (error: any) {
+      console.error('❌ Error:', error);
+      
+      if (error.message?.includes('quota') || error.message?.includes('RESOURCE_EXHAUSTED')) {
+        toast.error('❌ Firebase quota exceeded! Upgrade to Blaze plan.');
+      } else {
+        toast.error('Failed to download CSV: ' + error.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🔐 LOGIN SCREEN (if not authenticated)
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="max-w-md w-full"
+        >
+          <div className="bg-white rounded-2xl shadow-2xl p-8 sm:p-10">
+            
+            {/* Lock Icon */}
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full flex items-center justify-center">
+                <Lock className="w-10 h-10 text-white" />
+              </div>
             </div>
-          </div> */}
-        </div>
 
-        {/* Search Bar */}
-        {/* <div className="relative max-w-md mx-auto sm:mx-0 mb-6">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-          <input
-            type="text"
-            placeholder="Search by name, email or phone..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 text-[14px] rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 bg-white"
-          />
-        </div> */}
-
-        {/* 🎯 BULK COPY BUTTONS */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
-          {/* Copy All Emails Button */}
-          <button
-            onClick={handleCopyAllEmails}
-            disabled={loading || filteredUsers.length === 0}
-            className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
-          >
-            {copiedEmails ? (
-              <>
-                <Check className="w-5 h-5" />
-                <span>Emails Copied!</span>
-              </>
-            ) : (
-              <>
-                <Mail className="w-5 h-5" />
-                <span>Copy All Emails ({filteredUsers.length})</span>
-              </>
-            )}
-          </button>
-
-          {/* Copy All Phone Numbers Button */}
-          <button
-            onClick={handleCopyAllPhones}
-            disabled={loading || filteredUsers.length === 0}
-            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
-          >
-            {copiedPhones ? (
-              <>
-                <Check className="w-5 h-5" />
-                <span>Phones Copied!</span>
-              </>
-            ) : (
-              <>
-                <Phone className="w-5 h-5" />
-                <span>Copy All Phones ({filteredUsers.filter(u => u.phoneNumber).length})</span>
-              </>
-            )}
-          </button>
-        </div>
-
-        {/* Info Box */}
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-          <p className="text-[13px] text-blue-800">
-            <strong>💡 Tip:</strong> Use the buttons above to copy all emails or phone numbers at once. 
-            {searchTerm && <span className="ml-1">Currently showing filtered results for "{searchTerm}".</span>}
-          </p>
-        </div>
-
-        {/* Content */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          {loading ? (
-            <div className="flex justify-center items-center py-10">
-              <Loader2 className="w-6 h-6 text-gray-400 animate-spin" />
-              <span className="ml-2 text-gray-500">Loading...</span>
-            </div>
-          ) : filteredUsers.length === 0 ? (
-            <p className="text-center text-gray-500 py-10">
-              No users found {searchTerm && `for "${searchTerm}"`}.
+            {/* Title */}
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-2">
+              Secure Access Required
+            </h1>
+            <p className="text-gray-600 text-center mb-8 text-sm">
+              Enter password to access bulk export tools
             </p>
-          ) : (
-            <>
-              {/* Desktop Table View */}
-              <div className="hidden md:block overflow-x-auto">
-                <table className="w-full border-collapse">
-                  <thead className="bg-gray-100 text-left text-gray-600 text-sm uppercase">
-                    <tr>
-                      <th className="px-6 py-3 font-semibold">Full Name</th>
-                      <th className="px-6 py-3 font-semibold">Email</th>
-                      <th className="px-6 py-3 font-semibold">Phone Number</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-gray-700 text-sm">
-                    {filteredUsers.map((user) => (
-                      <tr
-                        key={user.id}
-                        className="hover:bg-gray-50 border-b border-gray-100"
-                      >
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <User className="w-4 h-4 text-gray-400" />
-                            <span className="font-medium">{user.fullName}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 break-words">
-                          <div className="flex items-center gap-2">
-                            <Mail className="w-4 h-4 text-gray-400" />
-                            <span>{user.email}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4">
-                          <div className="flex items-center gap-2">
-                            <Phone className="w-4 h-4 text-gray-400" />
-                            <span>{user.phoneNumber || 'N/A'}</span>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+
+            {/* Password Form */}
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Admin Password
+                </label>
+                <input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="Enter password"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                  autoFocus
+                />
               </div>
 
-              {/* Mobile Card View */}
-              <div className="block md:hidden p-4 space-y-4">
-                {filteredUsers.map((user) => (
-                  <div
-                    key={user.id}
-                    className="border border-gray-200 rounded-lg p-4 shadow-sm bg-white hover:shadow-md transition-all duration-300"
-                  >
-                    {/* Name */}
-                    <div className="flex items-start gap-2 mb-3">
-                      <User className="w-4 h-4 text-purple-600 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="text-[11px] text-gray-500 uppercase font-medium">Name</p>
-                        <p className="font-semibold text-gray-800 text-[15px]">
-                          {user.fullName}
-                        </p>
-                      </div>
-                    </div>
+              <button
+                type="submit"
+                className="ddf w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+              >
+                <span>Enter</span>
+                <span className="text-xs opacity-75">(or press Enter ↵)</span>
+              </button>
+            </form>
 
-                    {/* Email */}
-                    <div className="flex items-start gap-2 mb-3">
-                      <Mail className="w-4 h-4 text-purple-600 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="text-[11px] text-gray-500 uppercase font-medium">Email</p>
-                        <p className="text-[13px] text-gray-700 break-words">
-                          {user.email}
-                        </p>
-                      </div>
-                    </div>
+            {/* Security Note */}
+            <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+              <p className="text-xs text-yellow-800 text-center">
+                🔒 This page contains sensitive user data. Only authorized personnel should access it.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
-                    {/* Phone */}
-                    <div className="flex items-start gap-2">
-                      <Phone className="w-4 h-4 text-purple-600 mt-1 flex-shrink-0" />
-                      <div>
-                        <p className="text-[11px] text-gray-500 uppercase font-medium">Phone</p>
-                        <p className="text-[13px] text-gray-700">
-                          {user.phoneNumber || 'Not provided'}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
+  // 📊 MAIN EXPORT PAGE (After successful login)
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50 flex items-center justify-center p-4 sm:p-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="max-w-2xl w-full"
+      >
+        {/* Logout Button */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-md"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </button>
         </div>
 
-        {/* Info Footer */}
-        <div className="mt-6 text-center text-[13px] text-gray-500">
-          Showing {filteredUsers.length} of {total} users
+        {/* Main Card */}
+        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-8 sm:p-12">
+          
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
+              Bulk Export Tool
+            </h1>
+            <p className="text-gray-600 text-[15px]">
+              Copy all emails, phone numbers, or download as CSV
+            </p>
+            {totalUsers && (
+              <p className="text-purple-600 font-semibold mt-2">
+                📊 {totalUsers.toLocaleString()} users in database
+              </p>
+            )}
+          </div>
+
+          {/* Info Box */}
+          <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-6">
+            <p className="text-sm text-blue-800 leading-relaxed">
+              <strong> Smart Loading:</strong> Click a button below to fetch and copy data instantly. 
+            </p>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="space-y-4">
+            
+            {/* Copy All Emails */}
+            <button
+              onClick={handleCopyAllEmails}
+              disabled={loading}
+              className="ddf w-full flex items-center justify-between bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-5 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <div className="flex items-center gap-3">
+                {loading && !copiedEmails && !copiedPhones ? (
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                ) : copiedEmails ? (
+                  <Check className="w-6 h-6" />
+                ) : (
+                  <Mail className="w-6 h-6" />
+                )}
+                <div className="text-left">
+                  <p className="text-lg">Copy All Emails</p>
+                </div>
+              </div>
+              {copiedEmails && (
+                <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+                  Copied!
+                </span>
+              )}
+            </button>
+
+            {/* Copy All Phones */}
+            <button
+              onClick={handleCopyAllPhones}
+              disabled={loading}
+              className="ddf w-full flex items-center justify-between bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white px-6 py-5 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <div className="flex items-center gap-3">
+                {loading && copiedEmails && !copiedPhones ? (
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                ) : copiedPhones ? (
+                  <Check className="w-6 h-6" />
+                ) : (
+                  <Phone className="w-6 h-6" />
+                )}
+                <div className="text-left">
+                  <p className="text-lg">Copy All Phone Numbers</p>
+                </div>
+              </div>
+              {copiedPhones && (
+                <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+                  Copied!
+                </span>
+              )}
+            </button>
+
+            {/* Download CSV */}
+            <button
+              onClick={handleDownloadCSV}
+              disabled={loading}
+              className="ddf w-full flex items-center justify-between bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-5 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <div className="flex items-center gap-3">
+                {loading && copiedEmails && copiedPhones ? (
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                ) : (
+                  <Download className="w-6 h-6" />
+                )}
+                <div className="text-left">
+                  <p className="text-lg">Download Full CSV</p>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          {/* Loading Status */}
+          {loading && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 bg-gray-50 rounded-xl p-4 text-center"
+            >
+              <Loader2 className="w-6 h-6 text-purple-600 animate-spin mx-auto mb-2" />
+              <p className="text-sm text-gray-600">Processing... This may take 30-60 seconds for all users</p>
+            </motion.div>
+          )}
         </div>
       </motion.div>
     </div>
