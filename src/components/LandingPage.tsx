@@ -145,7 +145,7 @@ useEffect(() => {
       <a href="#home" className="text-[15px] text-black hover:text-purple-600 transition-colors">Home</a>
       <a href="#about" className="text-[15px] text-black hover:text-purple-600 transition-colors">About</a>
       <a href="#features" className="text-[15px] text-black hover:text-purple-600 transition-colors">Features</a>
-      <a href="https://x.com/tokicardAI" className="text-[15px] text-black hover:text-purple-600 transition-colors"> Follow on X</a>
+      {/* <a href="https://x.com/tokicardAI" className="text-[15px] text-black hover:text-purple-600 transition-colors"> Follow on X</a> */}
      <Link 
   to="/referral"
   onClick={() => setMobileMenuOpen(false)}
@@ -241,13 +241,13 @@ useEffect(() => {
             >
               Features
             </a>
-             <a 
+             {/* <a 
               href="https://x.com/tokicardAI"
               onClick={() => setMobileMenuOpen(false)}
               className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
             >
               Follow on X
-            </a>
+            </a> */}
             <Link 
   to="/referral"
   onClick={() => setMobileMenuOpen(false)}
@@ -1005,7 +1005,7 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}>
                 Follow Us On Instagram
               </button> */}
-              <div className='  socialicon'>
+              {/* <div className='  socialicon'>
                   <button onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
                   <img src={Xicon} alt="" />
                 </button>
@@ -1020,7 +1020,7 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
                   <img src={Tictok} alt="" />
                 </button>
               
-              </div>
+              </div> */}
               <p className="text-[11px] sm:text-[12px] text-gray-500" style={{ fontWeight: 400 }}>
                 © 2025 TokiCard. All Rights Reserved.
               </p>

@@ -476,9 +476,10 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
                      
                  </div>
+
+                   {/* Follow Us on X */}
                        <div className="followxbtn">
-               {/* Follow Us on X */}
-                <motion.button
+                {/* <motion.button
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.0, duration: 0.5 }}
@@ -490,7 +491,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                 >
                   
                   Follow Us on X
-                </motion.button>
+                </motion.button> */}
           </div>
              </motion.div>
           ) : (
@@ -550,8 +551,9 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                         >
                             {isSubmitting ? "Checking status..." : "Join Waitlist"}
                         </button>
-                              <div className="followxbtn">
-                                       {/* Follow Us on X */}
+
+                           {/* Follow Us on X */}
+                              {/* <div className="followxbtn">
                                         <motion.button
                                           initial={{ opacity: 0, y: 10 }}
                                           animate={{ opacity: 1, y: 0 }}
@@ -565,7 +567,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
                                           
                                           Follow Us on X
                                         </motion.button>
-                                  </div>
+                                  </div> */}
                     </form>
                 )}
 

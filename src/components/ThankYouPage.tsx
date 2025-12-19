@@ -134,7 +134,7 @@ export function ThankYouPage({ userName = 'TOKICARD USER' }: ThankYouPageProps) 
         </motion.p>
 
         {/* Follow Us on X */}
-        <motion.button
+        {/* <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.5 }}
@@ -146,10 +146,10 @@ export function ThankYouPage({ userName = 'TOKICARD USER' }: ThankYouPageProps) 
         >
           
           Follow Us on X
-        </motion.button>
+        </motion.button> */}
 
         
-    <motion.button
+    {/* <motion.button
   initial={{ opacity: 0, y: 10 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ delay: 1.0, duration: 0.5 }}
@@ -169,10 +169,10 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
   style={{ fontWeight: 400 }}
 >
   Make a post on X
-</motion.button>
+</motion.button> */}
 
 
-      <motion.button
+      {/* <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.5 }}
@@ -183,8 +183,8 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
           style={{ fontWeight: 400 }}
         >
           Follow Us on Instagram
-        </motion.button>
-         <motion.button
+        </motion.button> */}
+         {/* <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.5 }}
@@ -196,9 +196,9 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
         >
           
          Follow Us on Tiktok
-        </motion.button>
+        </motion.button> */}
           {/* Follow Us on X */}
-        <motion.button
+        {/* <motion.button
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.5 }}
@@ -210,7 +210,7 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
         >
           
          Join Telegram 
-        </motion.button>
+        </motion.button> */}
         
       {/* --- New Referral Section --- */}
 {/* --- Refined Referral Section --- */}
@@ -283,7 +283,7 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
 
 
         {/* Small Text Below */}
-        <motion.p
+        {/* <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.4, duration: 0.5 }}
@@ -291,7 +291,7 @@ Join me and get early access too using my invite link 👉 ${referralLink}`
           style={{ fontWeight: 400 }}
         >
           Follow us for updates, launch announcements, and lifestyle previews.
-        </motion.p>
+        </motion.p> */}
       </motion.div>
     </div>
   );

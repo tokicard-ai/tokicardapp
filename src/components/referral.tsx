@@ -128,8 +128,7 @@ export function ReferralLookupPage() {
         >
           {isLoading ? 'Checking...' : 'Check Rewards'}
         </button>
-          <div className="followxbtn">
-               {/* Follow Us on X */}
+          {/* <div className="followxbtn">
                 <motion.button
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -143,7 +142,7 @@ export function ReferralLookupPage() {
                   
                   Follow Us on X
                 </motion.button>
-          </div>
+          </div> */}
       </form>
 
       <p className="text-[12px] text-gray-500 text-center mb-6">
