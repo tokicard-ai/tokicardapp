@@ -128,21 +128,6 @@ export function ReferralLookupPage() {
         >
           {isLoading ? 'Checking...' : 'Check Rewards'}
         </button>
-          {/* <div className="followxbtn">
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0, duration: 0.5 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => window.open('https://x.com/tokicardAI', '_blank')}
-                  className="w-full bg-black text-white text-[14px] sm:text-[15px] rounded-full py-3 hover:bg-black/90 transition-colors disabled:opacity-60 "
-                  style={{ fontWeight: 400 }}
-                >
-                  
-                  Follow Us on X
-                </motion.button>
-          </div> */}
       </form>
 
       <p className="text-[12px] text-gray-500 text-center mb-6">

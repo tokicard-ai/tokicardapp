@@ -40,7 +40,7 @@ function AppRoutes() {
         />
 
         {/* Waitlist form */}
-        <Route
+        {/* <Route
           path="/waitlist"
           element={
             <WaitlistForm
@@ -48,19 +48,19 @@ function AppRoutes() {
               onLoadingStart={handleSubmissionStart}
             />
           }
-        />
+        /> */}
 
         {/* Thank-you page */}
-        <Route
+        {/* <Route
           path="/thankyou"
           element={<ThankYouPage userName={userName} />}
-        />
+        /> */}
          
           <Route path="/dashboard" element={<Dashboard />} />
         {/* Referral lookup page */}
-        <Route path="/referral" element={<ReferralLookupPage />} />
+        {/* <Route path="/referral" element={<ReferralLookupPage />} /> */}
          <Route path="/users" element={<Users />} />
-          <Route path="/UserList" element={<UserList/>} />
+          {/* <Route path="/UserList" element={<UserList/>} /> */}
       </Routes>
 
       <Toaster position="top-center" richColors />
