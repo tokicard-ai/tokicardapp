@@ -1,0 +1,336 @@
+@font-face {
+  font-family: "Host Grotesk";
+  src: url("./fonts/HostGrotesk-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900; /* variable range */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Host Grotesk";
+  src: url("./fonts/HostGrotesk-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+}
+.googleplay{
+    width: 120px;
+}
+.applestore{
+    width: 120px;
+}
+.head-div{
+    border: 2px solid red;
+}
+.whitebg{
+    background-color: white;
+    /* border: 2px solid red; */
+}
+.makedeposit{
+   display: flex;
+   justify-content: end;
+   text-align: end;
+}
+.makedeposit img{
+    height: 650px;
+}
+.chain-badge{
+    border-radius: 13px;
+    padding:6px 9px;
+    color: #CFCFCF;
+}
+.chain-badge span{
+    color: #CFCFCF;
+}
+.iphone-img{
+    height: 500px;
+     margin-bottom: -80px;
+    width:73%;
+}
+ .betterafrica{
+    /* font-weight: 900; */
+     font-family: "Host Grotesk", sans-serif;
+ }
+.sendmoneydiv{
+    /* border: 2px solid red; */
+    margin-bottom: -180px;
+}
+.convertcrypto{
+    font-weight: 800;
+}
+.hostfont{
+    font-family: "Host Grotesk", sans-serif;
+}
+.sendmoneytext{
+    color:#50555C;
+}
+.tokicardlogo{
+    width:160px ;
+  }
+  .darksection{
+    padding-top: 130px;
+    padding-bottom: 130px;
+  }
+
+.darktheme{
+    position: relative;
+    height: 480px;
+    margin-top: -40px;
+    margin-bottom: -80px;
+    margin-right: -70px;
+    /* width: 80%; */
+}
+.betterafrica{
+    /* border: 2px solid red; */
+    font-weight: 900;
+}
+.darkthree{
+    border: 2px solid blue;
+}
+.securedirect{
+    text-align: center;
+    font-size: 13px;
+    color: #000000B2;
+;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.btn{
+    border-radius: 10px ;
+    padding:4px 14px;
+}
+.virtualcard{
+    margin-bottom: 5px;
+}
+.virtualcard img{
+    width: 100%;
+}
+.comissiondiv{
+    display: flex;
+    justify-content: center;
+}
+.comissiondiv img{
+   position: relative;
+   height: 390px;
+   width: 66%;
+   bottom: -50px;
+   margin-top: -50px;
+}
+.purplesection{
+    margin-top: 30px;
+}
+.footerimgdiv {
+    position: relative;
+   margin-bottom: -65px; 
+   margin-right: -230px;
+   /* border: 2px solid red; */
+}
+.footerimgdiv img{
+     width: 80%;
+}
+.ratefeature h5{
+    font-size: 27px;
+    letter-spacing: -1px;
+    line-height: 41px;
+}
+.card-section{
+    margin-top: 250px;
+    margin-bottom: 120px;
+}   
+/* For screens 768px and below (mobile) */
+.tinyfont{
+    font-size: 9px;
+}
+.tokiwallet{
+    color: #A0A0A0;
+    font-size: 16px;
+    font-weight: 200;
+}
+.greyfont{
+    color: #A0A0A0;
+    font-size: 19px;
+}
+.sendmoneyhr{
+    font-weight: 400;
+}
+.withtokicard{
+    font-size: 14px;
+    line-height: 28px;
+}
+
+@media (max-width: 997px) {
+  /* styles here */
+  .card-section{
+    margin-top: 180px;
+}   
+.darktheme{
+    position: relative;
+    height: 380px;
+    /* top: 80px; */
+    right: -20px;
+    margin-top: -10px;
+    margin-right: -90px;
+    margin-bottom: -80px;
+    width: 100%;
+}
+.footerimgdiv {
+    position: relative;
+   margin-bottom: -65px; 
+   margin-right: -190px;
+   /* border: 2px solid red; */
+}
+.iphone-img{
+    height: 350px;
+     width:53%;
+}
+ .mobile-only {
+    display: block;
+  }
+  .makedeposit img{
+    height: 550px;
+}
+.darksection{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.darktwo{
+      padding-left: 10px;
+    padding-right: 10px;
+}
+.comissiondiv img{
+   position: relative;
+   bottom: -70px;
+   margin-top: -100px;
+}
+}
+
+
+@media (max-width: 769px) {
+.better-div{
+    /* border: 2px solid red; */
+    margin-top: 30px;
+}
+ .betterafrica{
+    font-weight: 900;
+ }
+  .download{
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: lighter;
+  }
+  .tokicardlogo{
+    width:110px ;
+  }
+   .mobile-only {
+    display: none;
+  }
+  .darksection{
+    padding-top: 43px;
+    padding-bottom: 43px;
+  }
+ .btn{
+    padding: 5px 10px;
+    /* padding: 20px; */
+ }
+ .iphone-img{
+    /* border: 2px solid red; */
+    height: 225px;
+     margin-bottom: -80px;
+    width:100%;
+}
+.securedirect{
+    margin-top: 20px;
+}
+.card-section{
+    margin-top: 220px;
+}
+
+.darktheme{
+    position: relative;
+    height: 380px;
+    /* top: 80px; */
+    right: -6px;
+    margin-top: -30px;
+    
+    margin-bottom: -30px;
+    width: 100%;
+      /* border: 2px solid red; */
+}
+.footerimgdiv {
+    position: relative;
+    right: -6px;
+    margin-top: -30px;
+    margin-right: -120px;
+    margin-bottom: -64px;
+    width: 100%;
+   
+}
+.makedeposit{
+    padding: 13px;
+    /* border: 2px solid red; */
+     justify-content: center;
+      text-align: center;
+}
+.makedeposit img{
+    height: 400px;
+}
+.sendmoneytext{
+      
+    color:#50555C;
+    font-size: 12px;
+}
+ .ratefeatureh{
+    text-align: center;
+ }
+ .ratefeature h5{
+    font-size: 19px;
+    letter-spacing: -3%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.betterafrica{
+    font-weight: 900;
+}
+.card-section{
+     margin-bottom: 20px;
+}
+.ratefeature h5{
+    line-height: 30px;
+}
+.darkthemediv{
+    margin-top: 20px;
+}
+ratefeaturediv{
+       border: 2px solid red;
+}
+.greyfont{
+    /* border: 2px solid red; */
+    font-size: 16px;
+}
+.mdn{
+    /* border: 2px solid red; */
+}
+.comissiondiv img{
+   position: relative;
+   width: 66%;
+   bottom: -70px;
+   margin-top: -100px;
+}
+.withtokicard{
+    font-size: 14px;
+    line-height: 20px;
+}
+
+}
+@media (min-width: 410px) and (max-width: 450px) {
+  .iphone-img{ 
+     height: 255px;
+  }
+  .darktheme{
+     right: -20px;
+     width: 84%;
+  }
+}
+
+/* .mynav{
+    border: 2px solid blue;
+} */
+/* .navdiv{
+    border: 2px solid red;
+} */
