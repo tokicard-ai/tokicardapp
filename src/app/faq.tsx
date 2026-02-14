@@ -175,16 +175,16 @@ export default function FAQ() {
   ];
 
   return (
-    <div className="min-h-screen  text-white">
+    <div className="min-h-screen  text-white hostfont">
       {/* Header */}
       <div className="bg-black py-8 border-b border-gray-800">
         <div className="max-w-5xl mx-auto px-6">
-          <a href="/" className="text-purple-500 hover:text-purple-400 inline-flex items-center gap-2 mb-6">
+          {/* <a href="/" className="text-purple-500 hover:text-purple-400 inline-flex items-center gap-2 mb-6">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            {/* Back to Home */}
-          </a>
+            Back to Home
+          </a> */}
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h1>
           <p className="text-gray-400">Everything you need to know about Tokicard</p>
         </div>
@@ -290,7 +290,8 @@ export default function FAQ() {
           <div className="flex justify-center gap-6 text-gray-400 mb-4">
             <a href="/" className="hover:text-white">Home</a>
             <a href="/privacy-policy" className="hover:text-white">Privacy Policy</a>
-            <a href="mailto:support@tokicardai.com" className="hover:text-white">Contact</a>
+              <a href="/terms" className="hover:text-white">Terms</a>
+            {/* <a href="mailto:support@tokicardai.com" className="hover:text-white">Contact</a> */}
           </div>
           <p className="text-gray-500 text-sm">
             © 2026 Oracle Digital Service LTD. All rights reserved.

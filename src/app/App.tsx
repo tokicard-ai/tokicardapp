@@ -394,6 +394,9 @@ export default function App() {
       <a href="/privacy-policy" className="text-sm text-gray-600 hover:text-purple-600 transition-colors">
         Privacy Policy
       </a>
+      <a href="/terms" className="text-sm text-gray-600 hover:text-purple-600 transition-colors">
+        Terms
+      </a>
       <a href="/faq" className="text-sm text-gray-600 hover:text-purple-600 transition-colors">
         FAQ
       </a>
